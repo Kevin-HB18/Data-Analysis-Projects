@@ -1,0 +1,27 @@
+1. la cantidad de clientes que compraron en la región este y que compraron más de $200
+2. sumas el valor de las ventas del 1-06-19 al 31-12-19 y que son de la categoria furniture
+3. devuelve los 10 productos más vendidos en el país
+4. Las 10 ciudades con su estado que menos ganancias generaron
+5. la orden que se entregó más tarde
+7. seleccione los id de los pedidos de corporate que pagaron online con modo ship mode primera clase 
+
+------------------historia por hacer-----------------------
+8. 10 ciudades que más periodo de tardanza en envíos tuvieron, pero si tiene más de 50 envíos, esto mejorar la velocidad ed envío
+9. que clientes compran de una categoria, pero de las demás no
+10. que clientes compran furniture o furniture y techonolgy al tiempo
+11. que clientes comprar furniture u offcie supplies pero no ambas al tiempo
+12. clientes que compran furniture pero no chairs
+13. cantidad de clientes por categoria pero donde sus compras sonde la región este u oeste, más no de ambas y compraron sus compras solo con un método de pago
+14. top 10 de compradores por cada categoria
+--------------------Mas---------------------------
+15. busqueme todas las ordenes que contengan productos "Xerox"
+16- busque los Avery que hayan sido comprados por gente del estado de NewYork y Texas
+17. el numero de ciudades por region y el numero de estados por region.
+18. promedo de ventas, el maximo, el total de ventas y el numero de ordenes por segemento
+19. liste el promedio de ventas por trimestres.
+20. productos pedidos en diciembre 2019 junto con su valor y la cantidad, además del profit.
+21. listar los clientes que tienen compras al menos arriba del promedio.
+22. los clientes con el maximo de ventas por region
+23. los clientes que se llaman Frank y Karen y que estan en Auburn
+24. seleccione los clientes que tienen sus ventas por debajo del promedio de alguna categoria.
+25. seleccione los clientes que han pedido cantidades mayores que el promedio de pedidos, por trimestres o por subcategoria.
