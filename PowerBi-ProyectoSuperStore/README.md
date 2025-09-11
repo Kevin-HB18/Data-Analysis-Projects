@@ -266,7 +266,70 @@ Se realizaron los siguientes pasos para el análisis:
  ```sql
  RETURN
 		FILTER(agrupador,[IsFurniture] = 1)
- ```  
-  
+ ```
+**f.** Saber cuál es el cliente que más compró por región y su valor. 
    
+   ```sql
+ clientesMaxRegion = 
+	VAR orderXclienteXregion = SUMMARIZE(
+		ADDCOLUMNS(
+			Order_Product,
+			"cliente", RELATED(Customer[id_customer]),
+			"theregion", RELATED(Region[Region])
+		),
+		[cliente],
+		[theregion],
+		"suma", SUM(Order_Product[Sales])
+	)
+
+
+	VAR clientesMaxPorRegion =
+	ADDCOLUMNS(
+		SUMMARIZE(
+			orderXclienteXregion,
+			[theregion]
+		),
+		"cliente_max", MAXX(
+			FILTER(
+				orderXclienteXregion,
+				[theregion] = EARLIER([theregion])
+			),
+			[suma]
+		)
+	)
+
+	VAR totales = SELECTCOLUMNS(FILTER(
+		NATURALINNERJOIN(
+			orderXclienteXregion,
+			clientesMaxPorRegion
+		),
+		[suma] = [cliente_max]
+	),[cliente],[theregion],[cliente_max])
+
+	RETURN
+		totales
+   ```  
+   En este caso, se creó una tabla calculada, donde lo que se hace es:
+   1. Añadir a Order_Product el nombre de la categoria y el id del cliente y luego agrupar por cliente, región y valor de ventas.
+   2. Usando (1), por cada región se va a buscar el valor más alto de venta.
+   3. Con los valores de (2), se hace join donde la suma de (1) coincida con la de (2) y se selecciona el cliente, la región y el valor del join. Se procede a retornar.
+
+### Conclusiones
+
+**1.** La región oeste (West) es la que más ventas generó aportando el 33.37% de las ventas en total, segudo del este (East) con 28.75%, la región central (Central) con 21.78% y finalizando con el sur (South) con 16.1%. También coincide con la cantidad de clientes que compraron por región, aunque respecto a los máximos compradores por región, el que más valor tiene de los cuatro es el del este, seguidos por el del oeste, el centro y finalizando con el del sur.  
+**2.** La segmentación consumidor (Consumer) es la que más ventas generó aportando el 48.09% del total de ventas.  
+**3.** El método de pago contra entrega (COD) es el que más ventas generó aportando el 42.62% del total de ventas.  
+**4.** El gráfico de líneas de ventas por años refleja una superioridad de ventas del 2020 respecto al 2019, pero en el gráfico de ganancias difiere en algunos momentos, donde el 2019 se impone respecto al 2020.  
+**5.** El modo de envío Standard Class fué el que mas ventas generó aportando el 58.27% respecto al total.  
+**6.** Los elementos de oficina (Office Supplies) generaron el 41.11% de las ventas en total.  
+**7.** Los tres productos que más valor de ventas generaron son los teléfonos (15.01%), las sillas (13.89%) y las carpetas (13.36%).  
+**8.** Los tres productos con más unidades vendidas son de la subcategoría de accesorios (Logitech P710e Mobile Speakerphone: 66 unidades), mesas (Chromcraft Round Conference Tables: 59 unidades) y sillas (Situations Contoured Folding Chairs, 4/Set: 47 unidades).  
+**9.** El 54.2% de los clientes compró de las tres categorias, mientras que el 32.21% compró de a dos, y el 13.58% compró de a una.  
+**10.** Si el cliente compra exclusivamente o muebles (Furniture) o elementos de oficina (Office Supplies), solo hay 198 clientes, y de estos clientes, solo el 10.61% compró los muebles, mientras que el 89.39% compró los elementos de oficina. Diferente en el caso de que se compraran ambos al tiempo, donde hay 562 clientes.  
+**11.** Si el cliente compra muebles (Furniture) sin tecnología (Technology), o si compra muebles y tecnologia, tiene 583 clientes, donde el 26.42% solo compró muebles, mientras que el 73.58% compró ambas categorías.  
+**12.** Los clientes que son de la región este (East) u oeste (West), más no de ambas, que pagaron con solo un método de pago son 35 (4.53%) de 773.  
+**13.** Los clientes del segmento Corporate que pagaron primera clase y Online son solo 73 (9.44%) de 773.  
+**14.** El promedio de días de entrega en general son 3.94 días.  
+**15.** El promedio de valor de venta por producto es de $265.35.
+
    
