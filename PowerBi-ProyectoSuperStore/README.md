@@ -79,7 +79,7 @@ Teniendo en cuenta este modelo, se procede a generar dashboards para el storytel
       )
    ```  
 	
-**5.** En el tercer dashboard llamado Dashboard Customers se realiza un entendimiento de los patrones de compra de los clientes, donde se tienen que crear en algunas ocasiones tablas calculadas o simplemente una medida, a continuación, se muestra:  
+**3.** En el tercer dashboard llamado Dashboard Customers se realiza un entendimiento de los patrones de compra de los clientes, donde se tienen que crear en algunas ocasiones tablas calculadas o simplemente una medida, a continuación, se muestra:  
 
    **a.** Clientes de segmentación corporación que enviaron por primera clase y pagaron online:  
    
